@@ -2,15 +2,14 @@ const { createServer } = require('node:http');
 const fs = require('node:fs');
 const EventEmitter = require('node:events');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const hostname = 'localhost';
+const port = 8080;
 const content = 'Test';
 const eventEmitter = new EventEmitter();
 
 const server = createServer((req, res) => {
   res.statuscode = 200;
   res.setHeader('Content-Type', 'text/plain');
-
   res.end('Hello World');
 });
 
