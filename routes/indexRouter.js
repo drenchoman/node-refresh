@@ -9,7 +9,7 @@ const links = [
 const users = ['Oscar', 'Kately', 'Leo'];
 
 indexRouter.get('/', (req, res) =>
-  res.render('index', { links, users })
+  res.render('index', { links, users, footer: 'footer' })
 );
 
 module.exports = indexRouter;

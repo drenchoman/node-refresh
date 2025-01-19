@@ -3,6 +3,7 @@ const app = express();
 const indexRouter = require('./routes/indexRouter');
 const authorRouter = require('./routes/authorRouter');
 const bookRouter = require('./routes/bookRouter');
+const aboutRouter = require('./routes/aboutRouter');
 const path = require('node:path');
 const assetsPath = path.join(__dirname, 'public');
 app.use(express.static(assetsPath));
@@ -15,6 +16,7 @@ app.use(m1);
 app.use(m2);
 app.use(m3);
 
+app.use('/about', aboutRouter);
 app.use('/authors', authorRouter);
 app.use('/books', bookRouter);
 app.use('/', indexRouter);
