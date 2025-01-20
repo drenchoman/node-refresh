@@ -7,32 +7,27 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>HomePage</title>
+    <title></title>
     <meta name="description" content="" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your
-        experience.
-      </p>
-    <![endif]-->
     <h1><%= title %></h1>
-    <a href="/messages">New Message</a>
+    <a href="/">Home</a>
     <div>
-      <% messages.forEach((message) => { %>
       <div>
-        <h3><%= message.user %></h3>
-        <p><%= message.text %></p>
-        <p><%=message.date %></p>
+        <form method="POST" action="/messages/new">
+          <label for="name">Name</label>
+          <input name="name" type="text" />
+          <label for="message">Message</label>
+          <input for="message" type="text" />
+          <button>Submit</button>
+        </form>
       </div>
-      <% }) %>
     </div>
     <script src="" async defer></script>
   </body>
