@@ -5,6 +5,7 @@ const path = require('node:path');
 const assetsPath = path.join(__dirname, 'public');
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(assetsPath));
 const PORT = process.env.PORT || 3000;
 

@@ -13,19 +13,19 @@
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <a href="/">Home</a>
     <div>
       <div>
-        <form method="POST" action="/messages/new">
+        <form method="POST" action="/new">
           <label for="name">Name</label>
           <input name="name" type="text" />
           <label for="message">Message</label>
-          <input for="message" type="text" />
-          <button>Submit</button>
+          <input name="message" type="text" />
+          <button type="submit" value="submit">Submit</button>
         </form>
       </div>
     </div>
