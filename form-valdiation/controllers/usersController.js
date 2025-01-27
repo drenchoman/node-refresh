@@ -36,10 +36,18 @@ const validateUser = [
 ];
 
 exports.usersListGet = (req, res) => {
-  res.render('index', {
-    title: 'User List',
-    users: usersStorage.getUsers(),
-  });
+  if (req.query.searchName) {
+    const user = usersStorage.getUserByName(req.query.searchName);
+    res.render('search', {
+      title: 'User',
+      user: user,
+    });
+  } else {
+    res.render('index', {
+      title: 'User List',
+      users: usersStorage.getUsers(),
+    });
+  }
 };
 
 exports.usersCreateGet = (req, res) => {
@@ -101,4 +109,13 @@ exports.usersUpdatePost = [
 exports.usersDeletePost = (req, res) => {
   usersStorage.deleteUser(req.params.id);
   res.redirect('/');
+};
+
+exports.usersSearchGet = (req, res) => {
+  const user = usersStorage.getUserByName(req.query.searchName);
+  console.log(user);
+  res.render('search', {
+    title: 'User',
+    user: user,
+  });
 };

@@ -18,6 +18,12 @@ class UsersStorage {
     return this.storage[id];
   }
 
+  getUserByName(searchName) {
+    let users = Object.values(this.storage);
+    let user = users.find((u) => u.firstName == searchName);
+    return user;
+  }
+
   updateUser(id, { firstName, lastName, email, age, bio }) {
     this.storage[id] = { id, firstName, lastName, email, age, bio };
   }
