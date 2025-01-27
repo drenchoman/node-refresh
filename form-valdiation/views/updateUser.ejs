@@ -28,6 +28,10 @@
         name="lastName"
         value="<%= user.lastName %>"
       />
+      <input type="email" name="email" value="<%= user.email %>" />
+      <input type="number" name="age" value="<%= user.age %>" />
+      <textarea name="bio"><%= user.bio %></textarea>
+
       <button type="submit">Update User</button>
     </form>
     <%- include("partials/errors.ejs") %>
