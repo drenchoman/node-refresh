@@ -1,9 +1,15 @@
 const db = require('../db/queries');
 
 async function getUsernames(req, res) {
-  const usernames = await db.getAllUsernames();
-  console.log('Usernames: ', usernames);
-  res.render('index', { usernames });
+  if (req.query.searchName) {
+    console.log('testing');
+    const user = await db.getUsernameSearch(req.query.searchName);
+    console.log('user', user);
+  } else {
+    const usernames = await db.getAllUsernames();
+    // console.log('Usernames: ', usernames);
+    res.render('index', { usernames, title: 'Cool people below' });
+  }
 }
 
 async function createUsernameGet(req, res) {

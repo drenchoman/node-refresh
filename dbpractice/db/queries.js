@@ -11,7 +11,17 @@ async function insertUsername(username) {
   ]);
 }
 
+async function getUsernameSearch(username) {
+  const query = {
+    text: 'SELECT * FROM usernames WHERE username = $1',
+    values: [username],
+  };
+  let { rows } = await pool.query(query);
+  return rows;
+}
+
 module.exports = {
   getAllUsernames,
   insertUsername,
+  getUsernameSearch,
 };
