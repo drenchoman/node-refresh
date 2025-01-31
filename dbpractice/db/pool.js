@@ -13,11 +13,3 @@ module.exports = new Pool({
   password: DB_PASSWORD,
   port: DB_PORT,
 });
-
-// module.exports = new Pool({
-//   host: 'localhost',
-//   user: 'drenchoman',
-//   database: 'top_users',
-//   password: 'lenin1',
-//   port: 5432,
-// });
