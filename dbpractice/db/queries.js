@@ -20,8 +20,17 @@ async function getUsernameSearch(username) {
   return rows;
 }
 
+async function userDelete(id) {
+  const query = {
+    text: 'DELETE FROM usernames WHERE id = $1',
+    values: [id],
+  };
+  await pool.query(query);
+}
+
 module.exports = {
   getAllUsernames,
   insertUsername,
   getUsernameSearch,
+  userDelete,
 };
