@@ -1,8 +1,14 @@
 const { Router } = require('express');
-const { getEmojis } = require('../controller/emojiController');
+const {
+  getEmojis,
+  getNewEmoji,
+  postNewEmoji,
+} = require('../controller/emojiController');
 
 const emojiRouter = Router();
 
 emojiRouter.get('/', getEmojis);
+emojiRouter.get('/new', getNewEmoji);
+emojiRouter.post('/new', postNewEmoji);
 
 module.exports = emojiRouter;
