@@ -15,11 +15,14 @@
     <h1><%= title %></h1>
     <div>
       <div>
-        <% categories.forEach(function(category) { %>
-        <a href="/categories/<%=category.id%>"
-          ><h2><%= category.name %></h2></a
+        <% emoji.forEach(function(e) { %>
+        <h2><%=e.emoji_icon %></h2>
+        <p>Description: <br><%=e.description %></p>
+        
+        <p>Category:<br /><a href="/categories/<%=e.category_id%>"><%=e.category_name %></p></a
         >
-        <% }); %>
+        <a href="<%=e.info_url %>">Learn More</a>
+        <% }) %>
       </div>
     </div>
     <a href="/">Home</a>

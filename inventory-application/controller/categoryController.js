@@ -8,6 +8,16 @@ async function getCategories(req, res) {
   });
 }
 
+async function getCategoryEmojis(req, res) {
+  const category = await db.getCategoryEmojis(req.params.id);
+  const name = category[0].name;
+
+  res.render('./category/category', {
+    title: name,
+    category,
+  });
+}
+
 async function getNewCategory(req, res) {
   res.render('./category/createCategory', {
     title: 'Add a New Category',
@@ -16,7 +26,6 @@ async function getNewCategory(req, res) {
 
 async function postNewCategory(req, res) {
   const category = await db.createNewCategory(req.body);
-  console.log(category);
   res.redirect('/categories');
 }
 
@@ -24,4 +33,5 @@ module.exports = {
   getCategories,
   getNewCategory,
   postNewCategory,
+  getCategoryEmojis,
 };

@@ -6,6 +6,15 @@ async function getAllEmojis() {
   return rows;
 }
 
+async function getEmoji(id) {
+  const query = {
+    text: 'SELECT emojis.id AS emoji_id, emojis.name AS emoji_name, emojis.category_id, category.name AS category_name, emojis.emoji_icon, emojis.description FROM emojis JOIN category ON emojis.category_id = category.id  WHERE emojis.id = $1',
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
 async function createNewEmoji(emoji) {
   const query = {
     text: 'INSERT INTO emojis(name, description, info_url, category_id, owner_id, emoji_icon) VALUES($1, $2, $3, $4, $5, $6)',
@@ -56,6 +65,26 @@ async function getAllCategories() {
   return rows;
 }
 
+async function getCategoryEmojis(id) {
+  let query = {
+    text: 'SELECT emojis.id AS emoji_id, emojis.name AS emoji_name, emojis.emoji_icon, category.name FROM emojis JOIN category ON emojis.category_id = category.id WHERE category_id = $1',
+    values: [id],
+  };
+
+  const { rows } = await pool.query(query);
+
+  if (rows.length > 0) {
+    return rows;
+  } else {
+    const query = {
+      text: 'SELECT * FROM category WHERE id = $1',
+      values: [id],
+    };
+    const { rows } = await pool.query(query);
+    return rows;
+  }
+}
+
 async function createNewCategory(category) {
   const query = {
     text: 'INSERT INTO category(name) VALUES($1)',
@@ -67,10 +96,12 @@ async function createNewCategory(category) {
 
 module.exports = {
   getAllEmojis,
+  getEmoji,
   createNewEmoji,
   getAllOwners,
   getAllCategories,
   getOwnerEmojis,
   createNewOwner,
   createNewCategory,
+  getCategoryEmojis,
 };

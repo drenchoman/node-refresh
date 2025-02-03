@@ -15,14 +15,16 @@
     <h1><%= title %></h1>
     <div>
       <div>
-        <% categories.forEach(function(category) { %>
-        <a href="/categories/<%=category.id%>"
-          ><h2><%= category.name %></h2></a
-        >
-        <% }); %>
+        <% category.forEach(function(c){ %>
+        <a href="/emojis/<%=c.id%>"></a>
+        <h2><%= c.emoji_name%> <%= c.emoji_icon %></h2>
+
+        <% }) %>
       </div>
+      <a href="/categories">All Categories</a>
+      <a href="/">Home</a>
     </div>
-    <a href="/">Home</a>
+
     <script src="" async defer></script>
   </body>
 </html>
