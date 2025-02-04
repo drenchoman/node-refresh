@@ -40,7 +40,7 @@ async function getAllOwners() {
 async function createNewOwner(owner) {
   const query = {
     text: 'INSERT INTO owner(name) VALUES($1)',
-    values: [owner.name],
+    values: [owner],
   };
   const { rows } = await pool.query(query);
   return rows;
