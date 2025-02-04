@@ -1,4 +1,17 @@
 const db = require('../db/queries');
+const { body, validationResult } = require('express-validator');
+
+const alphaErr = 'must only contain letters';
+const lengthErr = 'must be between 1 and 20 characters';
+
+const validateCategory = [
+  body('name')
+    .trim()
+    .isAlpha()
+    .withMessage(`Category name ${alphaErr}`)
+    .isLength({ min: 1, max: 20 })
+    .withMessage(`Category name ${lengthErr}`),
+];
 
 async function getCategories(req, res) {
   const categories = await db.getAllCategories();
@@ -24,10 +37,21 @@ async function getNewCategory(req, res) {
   });
 }
 
-async function postNewCategory(req, res) {
-  const category = await db.createNewCategory(req.body);
-  res.redirect('/categories');
-}
+const postNewCategory = [
+  validateCategory,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('./category/createCategory', {
+        title: 'Add a New Category',
+        errors: errors.array(),
+      });
+    }
+    const { name } = req.body;
+    const category = await db.createNewCategory(name);
+    res.redirect('/categories');
+  },
+];
 
 module.exports = {
   getCategories,

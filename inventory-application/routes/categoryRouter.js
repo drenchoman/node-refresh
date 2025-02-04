@@ -9,8 +9,8 @@ const {
 const categoryRouter = Router();
 
 categoryRouter.get('/', getCategories);
-categoryRouter.get('/:id', getCategoryEmojis);
 categoryRouter.get('/new', getNewCategory);
 categoryRouter.post('/new', postNewCategory);
+categoryRouter.get('/:id', getCategoryEmojis);
 
 module.exports = categoryRouter;

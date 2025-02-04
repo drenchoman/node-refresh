@@ -88,7 +88,7 @@ async function getCategoryEmojis(id) {
 async function createNewCategory(category) {
   const query = {
     text: 'INSERT INTO category(name) VALUES($1)',
-    values: [category.name],
+    values: [category],
   };
   const { rows } = await pool.query(query);
   return rows;
