@@ -25,6 +25,20 @@ const validateEmoji = [
     .trim()
     .isURL({ protocols: ['https', 'http'] })
     .withMessage('Url must be http or https'),
+  body('emoji_icon')
+    .trim()
+    .isLength({ min: 1, max: 15 })
+    .withMessage(`Emoji icon ${nameLengthErr}`),
+  body('category')
+    .trim()
+    .escape()
+    .isNumeric()
+    .withMessage('Category must be a number'),
+  body('owner')
+    .trim()
+    .escape()
+    .isNumeric()
+    .withMessage('Owner must be a number'),
 ];
 
 async function getEmojis(req, res) {
@@ -52,10 +66,27 @@ async function getNewEmoji(req, res) {
   });
 }
 
-async function postNewEmoji(req, res) {
-  const emoji = await db.createNewEmoji(req.body);
-  res.redirect('/');
-}
+const postNewEmoji = [
+  validateEmoji,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const categories = await db.getAllCategories();
+      let owners = await db.getAllOwners();
+      let filteredOwners = owners.filter((o) => o.name != null);
+      console.log(req.body);
+      return res.status(400).render('./emoji/createEmoji', {
+        title: 'Add a New Emoji!',
+        filteredOwners,
+        categories,
+        errors: errors.array(),
+      });
+    }
+    l;
+    const emoji = await db.createNewEmoji(req.body);
+    res.redirect('/');
+  },
+];
 
 module.exports = {
   getEmojis,

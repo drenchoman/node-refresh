@@ -22,6 +22,7 @@ async function getOwners(req, res) {
   });
 }
 
+// Using Async Handler
 const getOwner = expressAsyncHandler(async (req, res) => {
   const emojis = await db.getOwnerEmojis(Number(req.params.id));
   if (!emojis) {
