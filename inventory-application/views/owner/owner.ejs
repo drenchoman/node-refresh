@@ -14,12 +14,14 @@
   <body>
     <h1><%= title %></h1>
     <div>
+      <% if(locals.emojis) { %>
       <div>
         <% emojis.forEach(function(emoji){ %>
         <h2><%= emoji.emoji_name %></h2>
         <h3><%= emoji.emoji_icon %></h3>
-        <% }) %>
+        <% }) }%>
       </div>
+      <%- include('../partials/delete.ejs') %>
       <a href="/owners">Owners</a>
       <a href="/">Home</a>
     </div>

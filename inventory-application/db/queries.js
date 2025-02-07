@@ -59,6 +59,15 @@ async function getOwnerEmojis(id) {
   }
 }
 
+async function deleteOwner(id) {
+  const query = {
+    text: 'DELETE FROM owner WHERE id = $1',
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
 // -- Categories -- \\
 async function getAllCategories() {
   const { rows } = await pool.query('SELECT * FROM category');
@@ -104,4 +113,5 @@ module.exports = {
   createNewOwner,
   createNewCategory,
   getCategoryEmojis,
+  deleteOwner,
 };

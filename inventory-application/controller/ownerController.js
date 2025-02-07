@@ -22,11 +22,23 @@ async function getOwners(req, res) {
   });
 }
 
+async function deleteOwner(req, res) {
+  console.log(req.params);
+
+  const owner = await db.deleteOwner(Number(req.params.id));
+
+  console.log('delete outcome', owner);
+  res.redirect('/');
+}
+
 // Using Async Handler
 const getOwner = expressAsyncHandler(async (req, res) => {
   const emojis = await db.getOwnerEmojis(Number(req.params.id));
   if (!emojis) {
-    res.status(404).send('No emojis');
+    res.status(200).render('./owner/owner', {
+      title: 'test',
+      owner_id: req.params.id,
+    });
   }
 
   res.render('./owner/owner', {
@@ -61,4 +73,5 @@ module.exports = {
   getOwner,
   getNewOwner,
   postNewOwner,
+  deleteOwner,
 };
