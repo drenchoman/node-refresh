@@ -21,13 +21,20 @@ async function getCategories(req, res) {
   });
 }
 
+async function deleteCategoryPost(req, res) {
+  const category = await db.deleteCategory(Number(req.params.id));
+  console.log('deleted category', category);
+  res.redirect('/owner');
+}
+
 async function getCategoryEmojis(req, res) {
-  const category = await db.getCategoryEmojis(req.params.id);
-  const name = category[0].name;
+  const emojis = await db.getCategoryEmojis(req.params.id);
+  const name = emojis[0].name;
 
   res.render('./category/category', {
     title: name,
-    category,
+    emojis,
+    path: `/categories/${req.params.id}/delete`,
   });
 }
 
@@ -58,4 +65,5 @@ module.exports = {
   getNewCategory,
   postNewCategory,
   getCategoryEmojis,
+  deleteCategoryPost,
 };

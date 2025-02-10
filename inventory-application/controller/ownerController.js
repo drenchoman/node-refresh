@@ -37,12 +37,13 @@ const getOwner = expressAsyncHandler(async (req, res) => {
   if (!emojis) {
     res.status(200).render('./owner/owner', {
       title: 'test',
-      owner_id: req.params.id,
+      path: `/owners/${req.params.id}/delete`,
     });
   }
 
   res.render('./owner/owner', {
     title: `Emojis owned by ${emojis[0].owner_name}`,
+    owner_id: req.params.id,
     emojis,
   });
 });

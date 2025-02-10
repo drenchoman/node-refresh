@@ -21,7 +21,8 @@
         <h3><%= emoji.emoji_icon %></h3>
         <% }) }%>
       </div>
-      <%- include('../partials/delete.ejs') %>
+      <% if(!locals.emojis) { %> <%- include('../partials/delete.ejs')
+      %> <% } %>
       <a href="/owners">Owners</a>
       <a href="/">Home</a>
     </div>

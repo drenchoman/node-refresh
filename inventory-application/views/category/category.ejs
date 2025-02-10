@@ -14,13 +14,16 @@
   <body>
     <h1><%= title %></h1>
     <div>
+      <% if(locals.emojis) { %>
       <div>
-        <% category.forEach(function(c){ %>
-        <a href="/emojis/<%=c.id%>"></a>
-        <h2><%= c.emoji_name%> <%= c.emoji_icon %></h2>
+        <% emojis.forEach(function(emoji){ %>
+        <a href="/emojis/<%=emoji.emoji_id%>">
+        <h2><%= emoji.emoji_name%> </a> <%= emoji.emoji_icon %></h2>
 
-        <% }) %>
+        <% }) } %>
       </div>
+      <% if(!locals.emojis) { %> <%- include('../partials/delete.ejs')
+      %> <% } %>
       <a href="/categories">All Categories</a>
       <a href="/">Home</a>
     </div>

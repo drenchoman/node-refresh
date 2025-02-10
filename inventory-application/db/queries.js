@@ -74,6 +74,15 @@ async function getAllCategories() {
   return rows;
 }
 
+async function deleteCategory(id) {
+  const query = {
+    text: 'DELETE FROM category WHERE id = $1',
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
 async function getCategoryEmojis(id) {
   let query = {
     text: 'SELECT emojis.id AS emoji_id, emojis.name AS emoji_name, emojis.emoji_icon, category.name FROM emojis JOIN category ON emojis.category_id = category.id WHERE category_id = $1',
@@ -114,4 +123,5 @@ module.exports = {
   createNewCategory,
   getCategoryEmojis,
   deleteOwner,
+  deleteCategory,
 };
