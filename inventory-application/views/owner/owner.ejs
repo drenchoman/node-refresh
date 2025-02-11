@@ -17,7 +17,9 @@
       <% if(locals.emojis) { %>
       <div>
         <% emojis.forEach(function(emoji){ %>
-        <h2><%= emoji.emoji_name %></h2>
+        <a href="/emojis/<%=emoji.emoji_id%>">
+          <h2><%= emoji.emoji_name %></h2>
+        </a>
         <h3><%= emoji.emoji_icon %></h3>
         <% }) }%>
       </div>

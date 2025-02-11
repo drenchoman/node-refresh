@@ -10,8 +10,6 @@ const descLengthErr = 'must be beween 1 and 300 characters';
 const validateEmoji = [
   body('name')
     .trim()
-    .isAlpha()
-    .withMessage(`Emoji name ${alphaErr}`)
     .isLength({ min: 1, max: 15 })
     .withMessage(`Emoji name ${nameLengthErr}`)
     .notEmpty()
@@ -43,7 +41,7 @@ const validateEmoji = [
 
 async function getEmojis(req, res) {
   const emojis = await db.getAllEmojis();
-  res.render('index', { emojis, title: 'Hello world' });
+  res.render('index', { emojis, title: 'View our emojis' });
 }
 
 async function getEmoji(req, res) {
@@ -51,7 +49,18 @@ async function getEmoji(req, res) {
 
   let name = emoji[0].emoji_name;
 
-  res.render('./emoji/emoji', { title: name, emoji });
+  res.render('./emoji/emoji', {
+    title: name,
+    emoji,
+    path: `/emojis/${req.params.id}/delete`,
+  });
+}
+
+async function deleteEmojiPost(req, res) {
+  const emoji = await db.deleteEmoji(Number(req.params.id));
+  console.log('deleted emoji');
+
+  res.redirect('/');
 }
 
 async function getNewEmoji(req, res) {
@@ -82,7 +91,6 @@ const postNewEmoji = [
         errors: errors.array(),
       });
     }
-    l;
     const emoji = await db.createNewEmoji(req.body);
     res.redirect('/');
   },
@@ -92,5 +100,6 @@ module.exports = {
   getEmojis,
   getNewEmoji,
   postNewEmoji,
+  deleteEmojiPost,
   getEmoji,
 };

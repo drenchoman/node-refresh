@@ -21,8 +21,9 @@
         
         <p>Category:<br /><a href="/categories/<%=e.category_id%>"><%=e.category_name %></p></a
         >
-        <a href="<%=e.info_url %>">Learn More</a>
+        <a href="<%=e.info_url%>">Learn More</a>
         <% }) %>
+        <%- include('../partials/delete.ejs') %>
       </div>
     </div>
     <a href="/">Home</a>

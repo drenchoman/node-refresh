@@ -1,3 +1,4 @@
+const { deleteEmojiPost } = require('../controller/emojiController');
 const pool = require('./pool');
 
 // -- EMOJIS -- \\
@@ -8,7 +9,7 @@ async function getAllEmojis() {
 
 async function getEmoji(id) {
   const query = {
-    text: 'SELECT emojis.id AS emoji_id, emojis.name AS emoji_name, emojis.category_id, category.name AS category_name, emojis.emoji_icon, emojis.description FROM emojis JOIN category ON emojis.category_id = category.id  WHERE emojis.id = $1',
+    text: 'SELECT emojis.id AS emoji_id, emojis.name AS emoji_name, emojis.category_id, category.name AS category_name, emojis.emoji_icon, emojis.description, emojis.info_url FROM emojis JOIN category ON emojis.category_id = category.id  WHERE emojis.id = $1',
     values: [id],
   };
   const { rows } = await pool.query(query);
@@ -31,9 +32,27 @@ async function createNewEmoji(emoji) {
   return rows;
 }
 
+async function deleteEmoji(id) {
+  const query = {
+    text: 'DELETE FROM emojis WHERE id = $1',
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
 // -- Owners -- \\
 async function getAllOwners() {
   const { rows } = await pool.query('SELECT * FROM owner');
+  return rows;
+}
+
+async function getOwner(id) {
+  const query = {
+    text: 'SELECT * FROM owner WHERE id = $1',
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
   return rows;
 }
 
@@ -119,9 +138,11 @@ module.exports = {
   getAllOwners,
   getAllCategories,
   getOwnerEmojis,
+  getOwner,
   createNewOwner,
   createNewCategory,
   getCategoryEmojis,
   deleteOwner,
   deleteCategory,
+  deleteEmoji,
 };

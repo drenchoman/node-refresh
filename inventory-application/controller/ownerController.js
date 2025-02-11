@@ -23,20 +23,18 @@ async function getOwners(req, res) {
 }
 
 async function deleteOwner(req, res) {
-  console.log(req.params);
-
   const owner = await db.deleteOwner(Number(req.params.id));
-
   console.log('delete outcome', owner);
-  res.redirect('/');
+  res.redirect('/owners');
 }
 
 // Using Async Handler
 const getOwner = expressAsyncHandler(async (req, res) => {
   const emojis = await db.getOwnerEmojis(Number(req.params.id));
   if (!emojis) {
+    const owner = await db.getOwner(Number(req.params.id));
     res.status(200).render('./owner/owner', {
-      title: 'test',
+      title: owner[0].name,
       path: `/owners/${req.params.id}/delete`,
     });
   }
