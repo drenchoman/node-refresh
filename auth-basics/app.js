@@ -13,6 +13,7 @@ const pool = new Pool({
   password: DB_PASSWORD,
   port: DB_PORT,
 });
+const signUpRouter = require('./routes/sign-up');
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -25,5 +26,6 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.render('index'));
+app.use('/sign-up', signUpRouter);
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
