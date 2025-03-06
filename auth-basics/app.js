@@ -1,5 +1,5 @@
 const path = require('node:path');
-const { Pool } = require('pg');
+const pool = require('./db/pool');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -7,6 +7,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const { PORT } = process.env;
 
 const signUpRouter = require('./routes/sign-up');
+const loginRouter = require('./routes/login');
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -31,7 +32,7 @@ passport.use(
 );
 // Saves session / cookie using the id of the user
 
-passport.serlializeUser((user, done) => {
+passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
@@ -59,6 +60,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.render('index'));
-app.use('/sign-up', signUpRouter);
+app.use('/signup', signUpRouter);
+app.use('/login', loginRouter);
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
