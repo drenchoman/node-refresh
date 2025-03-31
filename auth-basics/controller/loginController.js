@@ -6,10 +6,12 @@ async function getLogin(req, res) {
 }
 
 async function postLogin(req, res) {
-  console.log('test');
+  console.log(req.body);
+
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/test',
+    successRedirect: '/member',
+    failureRedirect: '/login',
+    failureFlash: true,
   });
 }
 

@@ -12,16 +12,18 @@ const loginRouter = require('./routes/login');
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const { rows } = await pool.query(
-        'SELECT * FROM users WHERE username = $1',
-        [username]
-      );
-      const user = rows[0];
+      const query = {
+        text: 'SELECT * FROM users WHERE username = $1',
+        values: [username],
+      };
+      const { rows } = await pool.query(query);
+
+      const user = rows;
 
       if (!user) {
         return done(null, false, { message: 'Incorrect username' });
       }
-      if (user.password != password) {
+      if (user.password !== password) {
         return done(null, false, { message: 'Incorrect password' });
       }
       return done(null, user);
@@ -30,6 +32,7 @@ passport.use(
     }
   })
 );
+
 // Saves session / cookie using the id of the user
 
 passport.serializeUser((user, done) => {
@@ -52,6 +55,7 @@ passport.deserializeUser(async (id, done) => {
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(passport.initialize());
 
 app.use(
   session({ secret: 'cats', resave: false, saveUninitialized: false })
@@ -60,6 +64,13 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.render('index'));
+// app.post(
+//   '/log-in',
+//   passport.authenticate('local', {
+//     successRedirect: '/poo',
+//     failureRedirect: '/',
+//   })
+// );
 app.use('/signup', signUpRouter);
 app.use('/login', loginRouter);
 
