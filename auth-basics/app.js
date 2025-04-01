@@ -8,6 +8,7 @@ const { PORT } = process.env;
 
 const signUpRouter = require('./routes/sign-up');
 const loginRouter = require('./routes/login');
+const indexRouter = require('./routes/index');
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -18,7 +19,7 @@ passport.use(
       };
       const { rows } = await pool.query(query);
 
-      const user = rows;
+      const user = rows[0];
 
       if (!user) {
         return done(null, false, { message: 'Incorrect username' });
@@ -55,7 +56,6 @@ passport.deserializeUser(async (id, done) => {
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(passport.initialize());
 
 app.use(
   session({ secret: 'cats', resave: false, saveUninitialized: false })
@@ -63,14 +63,7 @@ app.use(
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => res.render('index'));
-// app.post(
-//   '/log-in',
-//   passport.authenticate('local', {
-//     successRedirect: '/poo',
-//     failureRedirect: '/',
-//   })
-// );
+app.use('/', indexRouter);
 app.use('/signup', signUpRouter);
 app.use('/login', loginRouter);
 
