@@ -1,4 +1,7 @@
-const { getLogin } = require('../controller/loginController');
+const {
+  getLogin,
+  postLogin,
+} = require('../controller/loginController');
 const passport = require('passport');
 
 const { Router } = require('express');
@@ -9,7 +12,7 @@ loginRouter.get('/', getLogin);
 loginRouter.post(
   '/',
   passport.authenticate('local', {
-    successRedirect: '/member',
+    successRedirect: '/',
     failureRedirect: '/login',
   })
 );
