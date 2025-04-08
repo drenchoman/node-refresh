@@ -6,10 +6,15 @@ async function getRegister(req, res) {
 }
 
 async function postRegister(req, res, next) {
-  const alias = req.body.alias;
-  const password = req.body.password;
-  const newAlias = await db.createNewAlias(alias, password);
-  res.redirect('/');
+  const user = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const newAlias = await db.createNewAlias(user, hashedPassword);
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 }
 
 module.exports = { getRegister, postRegister };
