@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%= title %></title>
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <div>
+      <h1><%=title%></h1>
+      <% if (user.status == 'Pleb'){ %>
+      <nav class="nav homeWrap">
+        <a class="homea" href="/">
+          <img class="home filterGreen" src="/images/home.svg" />
+        </a>
+      </nav>
+      <div class="wrapperLog">
+        <div>
+          <h2 class="header">Thanks for signing up!</h2>
+        </div>
+        <p>Enter passcode and confirm your membership</p>
+        <div class="passcodeWrapper">
+          <div class="passcodeSlider">
+            <span class="passcodeSlide">4</span>
+            <span class="passcodeSlide">5</span>
+            <span class="passcodeSlide">7</span>
+            <span class="passcodeSlide answer">2</span>
+          </div>
+          <div class="passcodeSlider">
+            <span class="passcodeSlide2">9</span>
+            <span class="passcodeSlide2 answer">1</span>
+            <span class="passcodeSlide2">6</span>
+            <span class="passcodeSlide2">8</span>
+          </div>
+          <div class="passcodeSlider">
+            <span class="passcodeSlide3">3</span>
+            <span class="passcodeSlide3">1</span>
+            <span class="passcodeSlide3 answer">6</span>
+            <span class="passcodeSlide3">8</span>
+          </div>
+          <div class="passcodeSlider">
+            <span class="passcodeSlide4">9</span>
+            <span class="passcodeSlide4">2</span>
+            <span class="passcodeSlide4">6</span>
+            <span class="passcodeSlide4 answer">9</span>
+          </div>
+        </div>
+        <form class="confirmWrapper" method="POST" action="">
+          <label for="passcode">Passcode</label>
+          <input
+            type="string"
+            required
+            name="passcode"
+            placeholder="Passcode"
+          />
+          <% if (locals.passcodeError) {%>
+          <span> <%= locals.passcodeError %></span>
+          <%}%>
+
+          <button class="fancyButton">Enter</button>
+        </form>
+        <div class="hackerAnimation">
+          <span class="number">1</span>
+          <span class="number2">0</span>
+          <span class="number3">1</span>
+          <span class="number4">0</span>
+          <span class="number5">1</span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <h2>poo</h2>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your
+        experience.
+      </p>
+    <![endif]-->
+
+    <script src="" async defer></script>
+  </body>
+</html>
