@@ -13,4 +13,17 @@ async function createNewAlias(alias, hashedPassword) {
   }
 }
 
-module.exports = { createNewAlias };
+async function confirmMembership(id) {
+  const query = {
+    text: 'UPDATE users SET status = $1 WHERE id = $2',
+    values: ['Member', id],
+  };
+  try {
+    const { rows } = await pool.query(query);
+    return rows;
+  } catch (err) {
+    console.log('error', err);
+  }
+}
+
+module.exports = { createNewAlias, confirmMembership };

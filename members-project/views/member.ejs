@@ -18,68 +18,36 @@
   <body>
     <div>
       <h1><%=title%></h1>
-      <% if (user.status == 'Pleb'){ %>
-      <nav class="nav homeWrap">
-        <a class="homea" href="/">
-          <img class="home filterGreen" src="/images/home.svg" />
-        </a>
-      </nav>
-      <div class="wrapperLog">
-        <div>
-          <h2 class="header">Thanks for signing up!</h2>
-        </div>
-        <p>Enter passcode and confirm your membership</p>
-        <div class="passcodeWrapper">
-          <div class="passcodeSlider">
-            <span class="passcodeSlide">4</span>
-            <span class="passcodeSlide">5</span>
-            <span class="passcodeSlide">7</span>
-            <span class="passcodeSlide answer">2</span>
-          </div>
-          <div class="passcodeSlider">
-            <span class="passcodeSlide2">9</span>
-            <span class="passcodeSlide2 answer">1</span>
-            <span class="passcodeSlide2">6</span>
-            <span class="passcodeSlide2">8</span>
-          </div>
-          <div class="passcodeSlider">
-            <span class="passcodeSlide3">3</span>
-            <span class="passcodeSlide3">1</span>
-            <span class="passcodeSlide3 answer">6</span>
-            <span class="passcodeSlide3">8</span>
-          </div>
-          <div class="passcodeSlider">
-            <span class="passcodeSlide4">9</span>
-            <span class="passcodeSlide4">2</span>
-            <span class="passcodeSlide4">6</span>
-            <span class="passcodeSlide4 answer">9</span>
-          </div>
-        </div>
-        <form class="confirmWrapper" method="POST" action="">
-          <label for="passcode">Passcode</label>
+      <% if(locals.user){ %> <% if (user.status == 'Pleb'){ %>
+      <h2>Hello <%=user.alias%></h2>
+      <div>
+        <p>
+          To confirm your membership please enter the secret code.
+        </p>
+        <form action="/member" method="POST">
+          <label for="secretPasscode">Passcode:</label>
           <input
-            type="string"
-            required
-            name="passcode"
-            placeholder="Passcode"
+            id="secretPasscode"
+            name="secretPasscode"
+            type="text"
           />
-          <% if (locals.passcodeError) {%>
-          <span> <%= locals.passcodeError %></span>
-          <%}%>
-
-          <button class="fancyButton">Enter</button>
+          <button type="submit">Submit</button>
         </form>
-        <div class="hackerAnimation">
-          <span class="number">1</span>
-          <span class="number2">0</span>
-          <span class="number3">1</span>
-          <span class="number4">0</span>
-          <span class="number5">1</span>
-        </div>
+        <% if(locals.error) {%>
+        <span><%= error %></span>
+        <% } %>
       </div>
+      <% } else if(user.status == 'Member'){ %>
+      <h2>Welcome back <%=user.alias%></h2>
+      <%} else { %>
+
+      <div>
+        <a href="/register">Register</a>
+        <br />
+        <a href="/login">Login</a>
+      </div>
+      <% } %> <% } %>
     </div>
-    <% } %>
-    <h2>poo</h2>
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
