@@ -39,6 +39,14 @@
       </div>
       <% } else if(user.status == 'Member'){ %>
       <h2>Welcome back <%=user.alias%></h2>
+      <div>
+        <% messages.forEach(function(message) { %>
+        <div>
+          <h3><%= message.title %></h3>
+          <p><%= message.message %></p>
+        </div>
+        <% }) %>
+      </div>
       <%} else { %>
 
       <div>

@@ -26,4 +26,20 @@ async function confirmMembership(id) {
   }
 }
 
-module.exports = { createNewAlias, confirmMembership };
+async function getAllMessages() {
+  const query = {
+    text: 'SELECT * FROM messages',
+  };
+  try {
+    const { rows } = await pool.query(query);
+    return rows;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+module.exports = {
+  createNewAlias,
+  confirmMembership,
+  getAllMessages,
+};

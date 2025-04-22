@@ -14,6 +14,24 @@ const postLogin = passport.authenticate('local', {
   failureFlash: true,
 });
 
+async function getMember(req, res) {
+  if (req.user) {
+    console.log('getting messages');
+    const messages = await db.getAllMessages();
+    console.log(messages);
+    res.render('member', {
+      title: 'poopoo',
+      user: req.user,
+      messages: messages,
+    });
+  } else {
+    res.render('member', {
+      title: 'poopoo',
+      user: req.user,
+    });
+  }
+}
+
 async function postMember(req, res) {
   const { secretPasscode } = req.body;
   try {
@@ -33,4 +51,4 @@ async function postMember(req, res) {
   }
 }
 
-module.exports = { getLogin, postLogin, postMember };
+module.exports = { getLogin, postLogin, postMember, getMember };

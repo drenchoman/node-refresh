@@ -8,6 +8,7 @@ const {
   getLogin,
   postLogin,
   postMember,
+  getMember,
 } = require('../controller/loginController');
 
 const router = Router();
@@ -26,9 +27,7 @@ router.post('/register', postRegister);
 router.get('/login', getLogin);
 router.post('/login', postLogin);
 
-router.get('/member', (req, res) => {
-  res.render('member', { title: 'poopoo', user: req.user });
-});
+router.get('/member', getMember);
 
 router.post('/member', postMember);
 
