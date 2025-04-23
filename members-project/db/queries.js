@@ -52,9 +52,23 @@ async function createNewMessage(message, user) {
   }
 }
 
+async function deleteMessage(id) {
+  const query = {
+    text: 'DELETE FROM messages WHERE id = $1',
+    values: [id],
+  };
+  try {
+    const { rows } = await pool.query(query);
+    return rows;
+  } catch (err) {
+    console.error('error', err);
+  }
+}
+
 module.exports = {
   createNewAlias,
   confirmMembership,
   getAllMessages,
   createNewMessage,
+  deleteMessage,
 };

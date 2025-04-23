@@ -37,7 +37,7 @@
         <span><%= error %></span>
         <% } %>
       </div>
-      <% } else if(user.status == 'Member'){ %>
+      <% } else if(user.status == 'Member' || 'Admin'){ %>
       <h2>Welcome back <%=user.alias%></h2>
       <div>
         <h3>New Message</h3>
@@ -57,7 +57,15 @@
           <span><%= message.alias %></span>
           <span><%= message.readable_date %></span>
         </div>
-        <% }) %>
+        <% if(user.status == 'Admin'){ %>
+        <div>
+          <form action="/member/message/delete" method="POST">
+            <input type="hidden" name="messageId" <%="value=" %><%=
+            message.message_id %> />
+            <input type="image" src="/images/trash.svg" />
+          </form>
+        </div>
+        <% } %> <% }) %>
       </div>
       <%} else { %>
 
