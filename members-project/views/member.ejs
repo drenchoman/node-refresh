@@ -40,10 +40,22 @@
       <% } else if(user.status == 'Member'){ %>
       <h2>Welcome back <%=user.alias%></h2>
       <div>
+        <h3>New Message</h3>
+        <form action="/member/message" method="post">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" />
+          <label for="message">New Message:</label>
+          <input type="text" id="message" name="message" />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+      <div>
         <% messages.forEach(function(message) { %>
         <div>
           <h3><%= message.title %></h3>
           <p><%= message.message %></p>
+          <span><%= message.alias %></span>
+          <span><%= message.readable_date %></span>
         </div>
         <% }) %>
       </div>

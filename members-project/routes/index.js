@@ -11,6 +11,8 @@ const {
   getMember,
 } = require('../controller/loginController');
 
+const { postMessage } = require('../controller/messageController');
+
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -30,5 +32,6 @@ router.post('/login', postLogin);
 router.get('/member', getMember);
 
 router.post('/member', postMember);
+router.post('/member/message', postMessage);
 
 module.exports = router;

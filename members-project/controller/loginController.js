@@ -16,9 +16,7 @@ const postLogin = passport.authenticate('local', {
 
 async function getMember(req, res) {
   if (req.user) {
-    console.log('getting messages');
     const messages = await db.getAllMessages();
-    console.log(messages);
     res.render('member', {
       title: 'poopoo',
       user: req.user,
