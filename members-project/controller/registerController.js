@@ -10,7 +10,7 @@ async function postRegister(req, res, next) {
   try {
     const hashedPassword = await bcrypt.hash(user.password, 10);
     const newAlias = await db.createNewAlias(user, hashedPassword);
-    res.redirect('/');
+    res.redirect('/member');
   } catch (error) {
     console.error(error);
     next(error);
