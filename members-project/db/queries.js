@@ -19,6 +19,20 @@ async function createNewAlias(alias, hashedPassword) {
   }
 }
 
+async function checkAliasExists(alias) {
+  const query = {
+    text: 'SELECT EXISTS (SELECT 1 FROM users WHERE alias = $1) AS x',
+    values: [alias],
+  };
+  try {
+    const { rows } = await pool.query(query);
+    return rows[0].x; // returns true or false
+  } catch (err) {
+    console.log('error', err);
+    throw err;
+  }
+}
+
 async function confirmMembership(id) {
   const query = {
     text: 'UPDATE users SET status = $1 WHERE id = $2',
@@ -73,6 +87,7 @@ async function deleteMessage(id) {
 
 module.exports = {
   createNewAlias,
+  checkAliasExists,
   confirmMembership,
   getAllMessages,
   createNewMessage,

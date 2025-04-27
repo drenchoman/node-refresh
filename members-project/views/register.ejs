@@ -20,8 +20,13 @@
       <h1><%= title %></h1>
       <div>
         <form action="/register" method="POST">
+          
           <label for="alias">Alias</label>
-          <input name="alias" id="alias" placeholder="H4CK3R M4N" />
+          <% if (locals.alias) { %>
+          <input name="alias" id="alias" placeholder="H4CK3R M4N" <%="value="%><%=alias%> />
+          <% } else { %>
+            <input type="text" required name="alias" placeholder="H4CK3R M4N" type="text">
+            <% } %>
           <label for="password">Password</label>
           <input type="password" name="password" id="password" />
           <label for="confirmPassword">Confirm Password</label>
@@ -83,6 +88,13 @@
         </div>
 
           <button type="submit">Join</button>
+          <% if (locals.errors){ %>
+            <ul class='errors'>
+              <% locals.errors.forEach(function(message) {  %>
+                <li><%= message.msg %></li>
+              <% } ); %>
+            </ul>
+            <% } %>
         </form>
       </div>
       <a href="/">Home</a>
