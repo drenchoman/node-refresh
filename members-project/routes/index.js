@@ -14,17 +14,12 @@ const {
 const {
   postMessage,
   deleteMessage,
+  getAllMessages,
 } = require('../controller/messageController');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  if (req.user) {
-    res.redirect('/member');
-  } else {
-    res.render('home', { title: 'Hello World', user: req.user });
-  }
-});
+router.get('/', getAllMessages);
 
 router.get('/register', getRegister);
 
@@ -37,5 +32,14 @@ router.get('/member', getMember);
 router.post('/member', postMember);
 router.post('/member/message', postMessage);
 router.post('/member/message/delete', deleteMessage);
+
+router.get('/logout', (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+});
 
 module.exports = router;

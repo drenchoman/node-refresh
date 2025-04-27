@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title><%= title %></title>
+    <title>Home</title>
     <meta name="description" content="" />
     <meta
       name="viewport"
@@ -17,15 +17,28 @@
   </head>
   <body>
     <div>
-      <h1><%=title%></h1>
-      <% if (user){ %>
-      <h2>Welcome back <%=user.alias%></h2>
-      <% } %>
+  
+        <div>
+          <h1>Hacker Club</h1>
+        </div>
+        <div >
+          <h2>Register or log in to make a post.</h2>
+        </div>
+          <div >
+              <a href="/login">Login</a>
+            
+              <a href="/register">Register</a>
+          </div>
       <div>
-        <a href="/register">Register</a>
-        <br />
-        <a href="/login">Login</a>
-      </div>
+        <% messages.forEach(function(message) { %>
+        <div>
+          <h3><%= message.title %></h3>
+          <p><%= message.message.replace(/[a-zA-Z]/g, 'x') %></p>
+          <span><%= message.alias.replace(/[a-zA-Z]/g, 'x') %></span>
+          <span><%= message.readable_date %></span>
+          <img src="/images/<%= message.avatar_name %>.svg"
+        </div>
+      <% }) %>
       <img src="/images/home.svg" />
     </div>
     <!--[if lt IE 7]>

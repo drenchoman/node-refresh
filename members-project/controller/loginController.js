@@ -18,13 +18,11 @@ async function getMember(req, res) {
   if (req.user) {
     const messages = await db.getAllMessages();
     res.render('member', {
-      title: 'poopoo',
       user: req.user,
       messages: messages,
     });
   } else {
     res.render('member', {
-      title: 'poopoo',
       user: req.user,
     });
   }

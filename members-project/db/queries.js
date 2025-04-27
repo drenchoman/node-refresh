@@ -3,7 +3,7 @@ const pool = require('./pool');
 async function createNewAlias(alias, hashedPassword) {
   console.log(alias, 'alias');
   const query = {
-    text: 'INSERT INTO users(alias, password, status, avatar) VALUES ($1, $2, $3, $4)',
+    text: 'INSERT INTO users(alias, password, status, avatar_id) VALUES ($1, $2, $3, $4)',
     values: [
       alias.alias,
       hashedPassword,
@@ -34,7 +34,7 @@ async function confirmMembership(id) {
 
 async function getAllMessages() {
   const query = {
-    text: "SELECT messages.id AS message_id, messages.title, messages.message, TO_CHAR(messages.created_at,'FMMonth DD, YYYY') AS readable_date, users.id AS user_id, users.alias FROM messages JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC",
+    text: "SELECT messages.id AS message_id, messages.title, messages.message, TO_CHAR(messages.created_at,'FMMonth DD, YYYY') AS readable_date, users.id AS user_id, users.alias, avatar.name as avatar_name FROM messages JOIN users ON messages.user_id = users.id LEFT JOIN avatar on users.avatar_id = avatar.id ORDER BY messages.created_at DESC",
   };
   try {
     const { rows } = await pool.query(query);

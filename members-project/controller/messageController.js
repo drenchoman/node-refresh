@@ -11,7 +11,6 @@ async function postMessage(req, res) {
 }
 
 async function deleteMessage(req, res) {
-  console.log(req.body.messageId, 'ID');
   try {
     const message = await db.deleteMessage(req.body.messageId);
     res.redirect('/member');
@@ -20,4 +19,19 @@ async function deleteMessage(req, res) {
   }
 }
 
-module.exports = { postMessage, deleteMessage };
+async function getAllMessages(req, res) {
+  if (req.user) {
+    res.redirect('/member');
+  } else {
+    try {
+      const messages = await db.getAllMessages();
+      res.render('home', {
+        messages: messages,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+module.exports = { postMessage, deleteMessage, getAllMessages };
