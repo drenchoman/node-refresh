@@ -5,17 +5,17 @@ const { body, validationResult } = require('express-validator');
 
 const secretCode = '1234';
 
-async function getLogin(req, res) {
+exports.getLogin = async function (req, res) {
   res.render('login', { title: 'Login' });
-}
+};
 
-const postLogin = passport.authenticate('local', {
+exports.postLogin = passport.authenticate('local', {
   successRedirect: '/member',
   failureRedirect: '/login',
   failureFlash: true,
 });
 
-async function getMember(req, res) {
+exports.getMember = async function (req, res) {
   if (req.user) {
     const messages = await db.getAllMessages();
     res.render('member', {
@@ -27,25 +27,37 @@ async function getMember(req, res) {
       user: req.user,
     });
   }
-}
+};
 
-async function postMember(req, res) {
-  const { secretPasscode } = req.body;
-  try {
-    if (secretPasscode == secretCode) {
-      const user = await db.confirmMembership(req.user.id);
-      console.log(user);
-      res.redirect('/member');
-    } else {
-      res.render('member', {
-        title: 'poopoo',
+exports.postMember = [
+  body('secretPasscode')
+    .trim()
+    .escape()
+    .notEmpty()
+    .withMessage('Secret Passcode cannot be empty')
+    .isLength({ min: 4, max: 4 })
+    .withMessage('The Secret Passcode is 4 digits long')
+    .custom(async (value) => {
+      if (value !== secretCode) {
+        throw new Error('Incorrect Secret Passcode');
+      }
+      return true;
+    }),
+  async function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('member', {
+        title: 'One Last Step',
         user: req.user,
-        error: 'Incorrect Passcode',
+        errors: errors.errors,
       });
     }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-module.exports = { getLogin, postLogin, postMember, getMember };
+    try {
+      const user = await db.confirmMembership(req.user.id);
+      res.redirect('/member');
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
+];

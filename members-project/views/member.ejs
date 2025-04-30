@@ -34,8 +34,12 @@
             />
             <button type="submit">Submit</button>
           </form>
-          <% if (locals.error) { %>
-          <span><%= error %></span>
+          <% if (locals.errors){ %>
+          <ul class="errors">
+            <% locals.errors.forEach(function(message) { %>
+            <li><%= message.msg %></li>
+            <% } ); %>
+          </ul>
           <% } %>
         </div>
 
