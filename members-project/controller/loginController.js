@@ -1,6 +1,7 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const { body, validationResult } = require('express-validator');
 
 const secretCode = '1234';
 

@@ -52,7 +52,7 @@ async function getAllMessages() {
   };
   try {
     const { rows } = await pool.query(query);
-    console.log('all messages', rows);
+    // console.log('all messages', rows);
     return rows;
   } catch (err) {
     console.error(err);

@@ -51,6 +51,13 @@
             <input type="text" id="message" name="message" />
             <button type="submit">Send</button>
           </form>
+          <% if (locals.errors){ %>
+          <ul class="errors">
+            <% locals.errors.forEach(function(message) { %>
+            <li><%= message.msg %></li>
+            <% } ); %>
+          </ul>
+          <% } %>
         </div>
 
         <div>

@@ -1,25 +1,45 @@
 const db = require('../db/queries');
+const { body, validationResult } = require('express-validator');
 
-async function postMessage(req, res) {
-  try {
-    const message = await db.createNewMessage(req.body, req.user);
-    console.log(message);
-    res.redirect('/member');
-  } catch (err) {
-    console.error(err);
-  }
-}
+exports.postMessage = [
+  body('title')
+    .trim()
+    .isLength({ min: 2 })
+    .withMessage('Title must be at least 2 characters long.'),
+  body('message')
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('Message must be at least 1 character long.'),
+  async function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log('error', errors);
+      const messages = await db.getAllMessages();
+      return res.render('member', {
+        messages: messages,
+        user: req.user,
+        errors: errors.errors,
+      });
+    }
+    try {
+      const message = await db.createNewMessage(req.body, req.user);
+      res.redirect('/member');
+    } catch (err) {
+      console.error(err);
+    }
+  },
+];
 
-async function deleteMessage(req, res) {
+exports.deleteMessage = async function (req, res) {
   try {
     const message = await db.deleteMessage(req.body.messageId);
     res.redirect('/member');
   } catch (err) {
     console.error(err);
   }
-}
+};
 
-async function getAllMessages(req, res) {
+exports.getAllMessages = async function (req, res) {
   if (req.user) {
     res.redirect('/member');
   } else {
@@ -32,6 +52,4 @@ async function getAllMessages(req, res) {
       console.error(err);
     }
   }
-}
-
-module.exports = { postMessage, deleteMessage, getAllMessages };
+};
