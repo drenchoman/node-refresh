@@ -6,6 +6,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link
+      href="/styles/globals.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Home</title>
     <meta name="description" content="" />
@@ -16,31 +21,43 @@
     <link rel="stylesheet" href="" />
   </head>
   <body>
-    <div>
-  
-        <div>
-          <h1>Hacker Club</h1>
-        </div>
-        <div >
-          <h2>Register or log in to make a post.</h2>
-        </div>
-          <div >
-              <a href="/login">Login</a>
-            
-              <a href="/register">Register</a>
-          </div>
+    <div class="wrapper">
       <div>
-        <% messages.forEach(function(message) { %>
-        <div>
-          <h3><%= message.title %></h3>
-          <p><%= message.message.replace(/[a-zA-Z]/g, 'x') %></p>
-          <span><%= message.alias.replace(/[a-zA-Z]/g, 'x') %></span>
-          <span><%= message.readable_date %></span>
-          <img src="/images/<%= message.avatar_name %>.svg"
+        <h1 class="main-header-hidden">Hacker Club</h1>
+        <img src="/images/glitch_20154.svg">
+      </div>
+      <div>
+        <h2>Register or log in to make a post.</h2>
+      </div>
+      <div>
+        <a href="/login">Login</a>
+
+        <a href="/register">Register</a>
+      </div>
+      <% messages.forEach(function(message) { %>
+      <div class="card-outer">
+        <div class="card-inner">
+          <div>
+            <h3 class="card-title"><%= message.title %></h3>
+            <p class="card-message">
+              <%= message.message.replace(/[a-zA-Z]/g, 'x') %>
+            </p>
+          </div>
+          <div class="card-bottom">
+            <div class="card-user-info">
+              <span
+                ><%= message.alias.replace(/[a-zA-Z]/g, 'x') %></span
+              >
+              <span><%= message.readable_date %></span>
+            </div>
+            <div class="card-image">
+              <img class="filter" src="/images/<%= message.avatar_name %>.svg" />
+            </div>
+          </div>
         </div>
+      </div>
       <% }) %>
-      <img src="/images/home.svg" />
-    </div>
+   
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please

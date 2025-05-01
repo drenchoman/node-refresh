@@ -9,6 +9,11 @@
     <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <link
+        href="/styles/globals.css"
+        rel="stylesheet"
+        type="text/css"
+      />
       <title>Member</title>
       <meta name="description" content="" />
       <meta
@@ -18,7 +23,7 @@
       <link rel="stylesheet" href="" />
     </head>
     <body>
-      <div>
+      <div class="wrapper">
         <% if (locals.user) { %> <% if (user.status == 'Pleb') { %>
         <h2>Hello <%= user.alias %></h2>
         <div>
@@ -45,7 +50,7 @@
 
         <% } else if (user.status == 'Member' || user.status ==
         'Admin') { %>
-        <h2>Welcome back <%= user.alias %></h2>
+        <h2><img src="/images/welcome.svg"><%= user.alias %></h2>
         <div>
           <h3>New Message</h3>
           <form action="/member/message" method="post">
@@ -70,29 +75,41 @@
 
         <div>
           <% messages.forEach(function(message) { %>
-          <div>
-            <h3><%= message.title %></h3>
-            <p><%= message.message %></p>
-            <span><%= message.alias %></span>
-            <span><%= message.readable_date %></span>
-            <img src="/images/<%= message.avatar_name %>.svg" />
-
-            <% if (user.status == 'Admin') { %>
-            <div>
-              <form action="/member/message/delete" method="POST">
-                <input
-                  type="hidden"
-                  name="messageId"
-                  value="<%= message.message_id %>"
-                />
-                <input type="image" src="/images/trash.svg" />
-              </form>
+          <div class="card-outer">
+            <div class="card-inner">
+              <div>
+                <h3 class="card-title"><%= message.title %></h3>
+                <p class="card-message"><%= message.message %></p>
+              </div>
+              <div class="card-bottom">
+                <div class="card-user-info">
+                  <span><%= message.alias %></span>
+                  <span><%= message.readable_date %></span>
+                </div>
+                <div class="card-image">
+                  <img
+                    class="filter"
+                    src="/images/<%= message.avatar_name %>.svg"
+                  />
+                </div>
+              </div>
             </div>
-            <% } %>
           </div>
-          <% }); %>
-        </div>
-        <% } %> <% } else { %>
+
+          <% if (user.status == 'Admin') { %>
+          <div>
+            <form action="/member/message/delete" method="POST">
+              <input
+                type="hidden"
+                name="messageId"
+                value="<%= message.message_id %>"
+              />
+              <input type="image" class="" src="/images/trash.svg" />
+            </form>
+          </div>
+          <% } %>
+       
+        <% }); %> <% } %> <% } else { %>
         <div>
           <h1>What are you doing here?</h1>
           <a href="/register">Register</a>
@@ -101,7 +118,6 @@
         </div>
         <% } %>
       </div>
-
       <!--[if lt IE 7]>
         <p class="browsehappy">
           You are using an <strong>outdated</strong> browser. Please
