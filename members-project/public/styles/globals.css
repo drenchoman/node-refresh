@@ -56,7 +56,8 @@ label {
 }
 p,
 span,
-li {
+li,
+a {
   font-family: 'VT323', monospace;
   color: #ffffff;
 }
@@ -73,6 +74,33 @@ footer {
   width: 100%;
   align-items: center;
   background-color: #000000;
+  font-size: 0.9rem;
+  position: absolute;
+}
+
+.welcome-wrapper {
+  max-width: 400px;
+  text-align: center;
+}
+
+.welcome-wrapper > * {
+  margin: 1rem 0;
+  padding: 0 0.5rem;
+}
+
+.login-wrapper > * {
+  padding: 0 0.5rem;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: inherit;
+  color: #ffffff;
+  font-weight: bold;
+}
+.login-wrapper > a:visited {
+  color: #ffffff;
 }
 
 .card-wrap {
@@ -91,6 +119,9 @@ footer {
   background-color: #000000;
   min-width: 375px;
   max-width: 390px;
+  border: 1px solid #df00ff;
+  margin: 1rem 0;
+  padding: 0 0.5rem;
 }
 .card-inner::after {
   content: '';
@@ -98,12 +129,12 @@ footer {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoTzkJlyJOviYgWcwFw-uYIG_bLuPn89xSsA&s');
   bottom: 0;
   right: 5;
-  width: 300px;
+  width: 100%;
   height: 300px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom left;
-  opacity: 0.11;
+  opacity: 0.03;
   /*   z-index: 1; */
   pointer-events: none;
   transform: rotate(0deg);
@@ -114,24 +145,27 @@ footer {
   position: absolute;
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoTzkJlyJOviYgWcwFw-uYIG_bLuPn89xSsA&s');
   bottom: 0;
-  right: 5;
-  width: 300px;
+  left: 0;
+  width: 100%;
   height: 300px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom left;
-  opacity: 0.1;
+  opacity: 0.04;
   z-index: 1;
   pointer-events: none;
-  transform: rotate(75deg);
+  filter: invert(15%) sepia(86%) saturate(4257%) hue-rotate(283deg)
+    brightness(118%) contrast(131%);
+  /* transform: rotate(eg); */
 }
 .card-inner {
   position: relative;
+
   overflow: hidden;
   z-index: 10; /* stays above image */
   color: #df00ff;
   border-radius: 5px;
-  border: 1px solid #df00ff;
+  /* border: 1px solid #df00ff; */
 
   padding: 1rem;
 }
@@ -190,6 +224,74 @@ footer {
 .filterWhite {
   filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(130deg)
     brightness(111%) contrast(101%);
+}
+
+.glitch {
+  width: 500px;
+  height: 500px;
+  background: url('../images//glitch.png');
+  background-size: cover;
+  animation: glitch 5s infinite steps(1);
+  position: fixed;
+  bottom: 0;
+  right: 10rem;
+  transform: rotate(10deg);
+}
+.malware-glitch {
+  width: 350px;
+  height: 350px;
+  background: url('../images/malware.png');
+  background-size: cover;
+  animation: glitch-mal 7s infinite steps(1);
+  position: fixed;
+  top: 5rem;
+  left: 8rem;
+  transform: rotate(-10deg);
+  filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(130deg)
+    brightness(111%) contrast(101%);
+}
+
+@keyframes glitch {
+  0%,
+  100% {
+    background: url('../images//glitch.png');
+    background-size: cover;
+  }
+  92.5% {
+    background: url('../images//glitch1.png');
+    background-size: cover;
+  }
+  95% {
+    background: url('../images//glitch2.png');
+    background-size: cover;
+    opacity: 1;
+  }
+  97.5% {
+    background: url('../images//glitch3.png');
+    background-size: cover;
+    opacity: 1;
+  }
+}
+@keyframes glitch-mal {
+  0%,
+  100% {
+    background: url('../images/malware.png');
+    background-size: cover;
+  }
+  92.5% {
+    background: url('../images/malware1.png');
+    background-size: cover;
+  }
+  95% {
+    background: url('../images/malware2.png');
+    background-size: cover;
+    opacity: 0;
+  }
+  97.5% {
+    background: url('../images/malware3.png');
+    background-size: cover;
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 414px) {

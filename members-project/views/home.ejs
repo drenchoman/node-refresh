@@ -22,18 +22,21 @@
   </head>
   <body>
     <div class="wrapper">
-      <div>
+      <div class="glitch">
+
+      </div>
+      <div class="malware-glitch"></div>
+      <div class="welcome-wrapper">
         <h1 class="main-header-hidden">Hacker Club</h1>
         <img src="/images/glitch_20154.svg">
-      </div>
-      <div>
-        <h2>Register or log in to make a post.</h2>
-      </div>
-      <div>
+        <h2>Login or register to make a post</h2>
+  
+      <div class="login-wrapper">
         <a href="/login">Login</a>
 
         <a href="/register">Register</a>
       </div>
+    </div>
       <% messages.forEach(function(message) { %>
       <div class="card-outer">
         <div class="card-inner">
@@ -57,6 +60,8 @@
         </div>
       </div>
       <% }) %>
+
+    
    
     <!--[if lt IE 7]>
       <p class="browsehappy">
