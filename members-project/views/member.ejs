@@ -14,6 +14,8 @@
         rel="stylesheet"
         type="text/css"
       />
+      <link href="/styles/login.css" rel="stylesheet" type="text/css" />
+
       <title>Member</title>
       <meta name="description" content="" />
       <meta
@@ -24,20 +26,23 @@
     </head>
     <body>
       <div class="wrapper">
+       
         <% if (locals.user) { %> <% if (user.status == 'Pleb') { %>
+          <div class="glitch low-opacity"></div>
+          <div class="malware-glitch low-opacity"></div>
         <h2>Hello <%= user.alias %></h2>
-        <div>
+        <div class="message-wrapper">
           <p>
             To confirm your membership please enter the secret code.
           </p>
           <form action="/member" method="POST">
-            <label for="secretPasscode">Passcode:</label>
+            <label for="secretPasscode">Passcode</label>
             <input
               id="secretPasscode"
               name="secretPasscode"
               type="text"
             />
-            <button type="submit">Submit</button>
+            <button type="submit">Join</button>
           </form>
           <% if (locals.errors){ %>
           <ul class="errors">
@@ -46,17 +51,30 @@
             <% } ); %>
           </ul>
           <% } %>
+          <a href="/">Home</a>
+
         </div>
 
         <% } else if (user.status == 'Member' || user.status ==
         'Admin') { %>
-        <h2><img src="/images/welcome.svg"><%= user.alias %></h2>
+          <div class="glitch"></div>
+          <div class="malware-glitch"></div>
+        <h2><img src="/images/welcome.svg"></h2>
         <div>
+          <h3><%= user.alias %></h3>
+          <div class="card-image">
+            <img
+              class="filter"
+              src="/images/<%= user.avatar_id %>.svg"
+            />
+          </div>
+        </div>
+        <div class="message-wrapper">
           <h3>New Message</h3>
           <form action="/member/message" method="post">
-            <label for="title">Title:</label>
+            <label for="title">Title</label>
             <input type="text" id="title" name="title" />
-            <label for="message">New Message:</label>
+            <label for="message">New Message</label>
             <input type="text" id="message" name="message" />
             <button type="submit">Send</button>
           </form>
@@ -110,6 +128,8 @@
           <% } %>
        
         <% }); %> <% } %> <% } else { %>
+          <div class="glitch"></div>
+          <div class="malware-glitch"></div>
         <div>
           <h1>What are you doing here?</h1>
           <a href="/register">Register</a>

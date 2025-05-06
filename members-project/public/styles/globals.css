@@ -63,7 +63,14 @@ a {
   color: #ffffff;
 }
 
+ul {
+  padding: 0;
+}
 footer {
+}
+
+button:hover {
+  cursor: pointer;
 }
 .main-header-hidden {
   display: none;
@@ -122,7 +129,7 @@ footer {
   background-color: #000000;
   min-width: 375px;
   max-width: 390px;
-  border: 1px solid #df00ff;
+  border: 3px double #df00ff;
   margin: 1rem 0;
   padding: 0 0.5rem;
 }
@@ -168,7 +175,6 @@ footer {
   z-index: 10; /* stays above image */
   color: #df00ff;
   border-radius: 5px;
-  /* border: 1px solid #df00ff; */
 
   padding: 1rem;
 }
@@ -256,6 +262,9 @@ footer {
   transform: rotate(-10deg);
   filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(130deg)
     brightness(111%) contrast(101%);
+}
+.low-opacity {
+  opacity: 0.2;
 }
 
 @keyframes glitch {

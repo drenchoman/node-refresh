@@ -59,6 +59,12 @@ async function getAllMessages() {
   }
 }
 
+// async function getAvatarName(){
+//   const query = {
+//     text: "SELECT avatar_name as avatar.name FROM USERS LEFT JOIN avatar on users.avatar_id WHERE"
+//   }
+// }
+
 async function createNewMessage(message, user) {
   const query = {
     text: 'INSERT INTO messages (user_id, title, message) VALUES ($1, $2, $3)',

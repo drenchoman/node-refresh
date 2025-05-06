@@ -4,6 +4,7 @@
   height: inherit;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 }
 
 .login-wrapper > form {
@@ -28,4 +29,28 @@
 
 .avatarWrapper > label {
   margin: 0 0.5rem;
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-wrapper > form {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  max-width: 390px;
+}
+
+.message-wrapper > form > * {
+  margin: 0.5rem 0;
+}
+
+.message-wrapper > form > button {
+  max-width: 3.5rem;
+  align-self: center;
 }
