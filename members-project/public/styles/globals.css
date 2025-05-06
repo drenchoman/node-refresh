@@ -50,7 +50,8 @@ h6 {
 h1,
 h2,
 h3,
-label {
+label,
+.label-like {
   font-family: 'Press Start 2P', cursive;
   color: #df00ff;
 }
@@ -72,7 +73,9 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
   align-items: center;
+  justify-content: center;
   background-color: #000000;
   font-size: 0.9rem;
   position: absolute;
@@ -200,6 +203,10 @@ footer {
   padding: 0.5rem 0;
 }
 
+.avatarImage {
+  width: 45px;
+}
+
 .card-image > img {
   width: 30px;
   filter: invert(15%) sepia(86%) saturate(4257%) hue-rotate(283deg)
@@ -245,7 +252,7 @@ footer {
   animation: glitch-mal 7s infinite steps(1);
   position: fixed;
   top: 5rem;
-  left: 8rem;
+  left: 10rem;
   transform: rotate(-10deg);
   filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(130deg)
     brightness(111%) contrast(101%);

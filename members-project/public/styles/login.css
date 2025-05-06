@@ -1,0 +1,31 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-wrapper > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-wrapper > form > * {
+  margin: 0.5rem 0;
+}
+
+.login-wrapper > form > button {
+  max-width: 3.5rem;
+  align-self: center;
+}
+
+.avatarWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.avatarWrapper > label {
+  margin: 0 0.5rem;
+}

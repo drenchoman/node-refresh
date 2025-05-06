@@ -12,6 +12,8 @@
     rel="stylesheet"
     type="text/css"
   />
+  <link href="/styles/login.css" rel="stylesheet" type="text/css" />
+
     <title><%= title %></title>
     <meta name="description" content="" />
     <meta
@@ -21,23 +23,24 @@
     <link rel="stylesheet" href="" />
   </head>
   <body>
-    <div>
+    <div class="wrapper">
+      <div class="login-wrapper">
       <h1><%= title %></h1>
-      <div>
+     
         <form action="/register" method="POST">
           
           <label for="alias">Alias</label>
           <% if (locals.alias) { %>
           <input name="alias" id="alias" placeholder="H4CK3R M4N" <%="value="%><%=alias%> />
           <% } else { %>
-            <input type="text" required name="alias" placeholder="H4CK3R M4N" type="text">
+            <input type="text" required name="alias" id="alias" placeholder="H4CK3R M4N" type="text">
             <% } %>
           <label for="password">Password</label>
           <input type="password" name="password" id="password" />
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" name="confirmPassword" id="confirmPassword">
+          <span class="label-like">Select Avatar</span> <br/>
           <div class='avatarWrapper'>
-            <span>Select Avatar:</span>
             <label class='animatePop delay-1'>
               <input type='radio' name='avatar' value='1' checked />
               <img class='avatarImage filter' src='/images/cube1.svg' />
@@ -89,10 +92,13 @@
           </label>
         </div>
 
+        <button type="submit">Join</button>
+      </div>
+      
 
-        </div>
-
-          <button type="submit">Join</button>
+          
+        </form>
+        <a href="/">Home</a>
           <% if (locals.errors){ %>
             <ul class='errors'>
               <% locals.errors.forEach(function(message) {  %>
@@ -100,9 +106,8 @@
               <% } ); %>
             </ul>
             <% } %>
-        </form>
+       
       </div>
-      <a href="/">Home</a>
     </div>
     <script src="" async defer></script>
   </body>

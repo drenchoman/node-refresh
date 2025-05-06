@@ -12,6 +12,7 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link href="/styles/login.css" rel="stylesheet" type="text/css" />
     <title><%= title %></title>
     <meta name="description" content="" />
     <meta
@@ -21,9 +22,10 @@
     <link rel="stylesheet" href="" />
   </head>
   <body>
-    <div>
-      <h1><%= title %></h1>
-      <div>
+    <div class="wrapper">
+      <div class="login-wrapper">
+        <h1><%= title %></h1>
+
         <form action="/login" method="POST">
           <label for="alias">Alias</label>
           <input name="alias" id="alias" placeholder="H4CK3R M4N" />
@@ -31,8 +33,9 @@
           <input type="password" name="password" id="password" />
           <button type="submit">Login</button>
         </form>
+
+        <a href="/">Home</a>
       </div>
-      <a href="/">Home</a>
     </div>
     <script src="" async defer></script>
   </body>
