@@ -59,11 +59,18 @@ async function getAllMessages() {
   }
 }
 
-// async function getAvatarName(){
-//   const query = {
-//     text: "SELECT avatar_name as avatar.name FROM USERS LEFT JOIN avatar on users.avatar_id WHERE"
-//   }
-// }
+async function getAvatarName(id) {
+  const query = {
+    text: 'SELECT name FROM avatar WHERE id = $1',
+    values: [id],
+  };
+  try {
+    const { rows } = await pool.query(query);
+    return rows;
+  } catch (err) {
+    console.error('error', err);
+  }
+}
 
 async function createNewMessage(message, user) {
   const query = {
@@ -98,4 +105,5 @@ module.exports = {
   getAllMessages,
   createNewMessage,
   deleteMessage,
+  getAvatarName,
 };

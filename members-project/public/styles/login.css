@@ -11,6 +11,9 @@
   display: flex;
   flex-direction: column;
 }
+.login-wrapper > form > input {
+  min-width: 300px;
+}
 
 .login-wrapper > form > * {
   margin: 0.5rem 0;
@@ -25,6 +28,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  max-width: 300px;
 }
 
 .avatarWrapper > label {
@@ -37,6 +41,7 @@
   height: inherit;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 }
 
 .message-wrapper > form {
@@ -53,4 +58,49 @@
 .message-wrapper > form > button {
   max-width: 3.5rem;
   align-self: center;
+}
+
+.passcode-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  justify-content: center;
+}
+.passcode-wrapper > a {
+  align-self: center;
+}
+.passcode-wrapper > img {
+  align-self: center;
+}
+
+.passcode-wrapper > form {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 390px;
+}
+
+.passcode-wrapper > form > * {
+  margin: 0.5rem 0;
+}
+
+.passcode-wrapper > form > button {
+  max-width: 3.5rem;
+  align-self: center;
+}
+
+.error-wrapper {
+  z-index: 5;
+}
+
+.user-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.user-wrapper > h3 {
+  font-size: 2rem;
 }

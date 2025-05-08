@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 
-const secretCode = '1234';
+const secretCode = '1929';
 
 exports.getLogin = async function (req, res) {
   res.render('login', { title: 'Login' });
@@ -17,10 +17,12 @@ exports.postLogin = passport.authenticate('local', {
 
 exports.getMember = async function (req, res) {
   if (req.user) {
+    const avatarName = await db.getAvatarName(req.user.avatar_id);
     const messages = await db.getAllMessages();
     res.render('member', {
       user: req.user,
       messages: messages,
+      avatarName: avatarName[0],
     });
   } else {
     res.render('member', {
