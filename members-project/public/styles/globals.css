@@ -15,7 +15,7 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-color: #18191a;
+  background-color: #000000;
 }
 img,
 picture,
@@ -83,7 +83,14 @@ button:hover {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
+  background: #000000;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(65, 25, 79, 1) 34%,
+    rgba(57, 16, 74, 1) 66%,
+    rgba(0, 0, 0, 1) 100%
+  );
   font-size: 0.9rem;
   position: absolute;
 }
@@ -97,6 +104,9 @@ button:hover {
 .welcome-wrapper > * {
   margin: 1rem 0;
   padding: 0 0.5rem;
+}
+.welcome-wrapper > img {
+  padding: 0;
 }
 
 .login-wrapper > * {
@@ -252,14 +262,14 @@ button:hover {
   transform: rotate(10deg);
 }
 .malware-glitch {
-  width: 350px;
-  height: 350px;
+  width: 500px;
+  height: 500px;
   background: url('../images/malware.png');
   background-size: cover;
   animation: glitch-mal 7s infinite steps(1);
   position: fixed;
   top: 5rem;
-  left: 10rem;
+  left: 11rem;
   transform: rotate(-10deg);
   filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(130deg)
     brightness(111%) contrast(101%);
@@ -292,20 +302,20 @@ button:hover {
 @keyframes glitch-mal {
   0%,
   100% {
-    background: url('../images/malware.png');
+    background: url('../images/hacker.png');
     background-size: cover;
   }
   92.5% {
-    background: url('../images/malware1.png');
+    background: url('../images/hacker1.png');
     background-size: cover;
   }
   95% {
-    background: url('../images/malware2.png');
+    background: url('../images/hacker2.png');
     background-size: cover;
     opacity: 0;
   }
   97.5% {
-    background: url('../images/malware3.png');
+    background: url('../images/hacker3.png');
     background-size: cover;
     opacity: 1;
   }
@@ -315,6 +325,9 @@ button:hover {
 }
 
 @media screen and (max-width: 375px) {
+  .card-outer {
+    min-width: 350px;
+  }
 }
 
 @media screen and (max-width: 325px) {
