@@ -6,14 +6,46 @@ const { body, validationResult } = require('express-validator');
 const secretCode = '1929';
 
 exports.getLogin = async function (req, res) {
-  res.render('login', { title: 'Login' });
+  if (req.session.flash) {
+    let error = req.session.flash.error;
+    res.render('login', { title: 'Login', error: error });
+  } else {
+    res.render('login', { title: 'Login' });
+  }
 };
 
-exports.postLogin = passport.authenticate('local', {
-  successRedirect: '/member',
-  failureRedirect: '/login',
-  failureFlash: true,
-});
+exports.postLogin = [
+  body('alias')
+    .trim()
+    .notEmpty()
+    .withMessage('Alias cannot be empty'),
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Password cannot be empty'),
+
+  async function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('login', {
+        title: 'Login',
+        errors: errors.errors,
+      });
+    } else {
+      passport.authenticate('local', {
+        successRedirect: '/member',
+        failureRedirect: '/login',
+        failureFlash: true,
+      })(req, res, next);
+    }
+  },
+];
+
+// exports.postLogin = passport.authenticate('local', {
+//   successRedirect: '/member',
+//   failureRedirect: '/login',
+//   failureFlash: true,
+// });
 
 exports.getMember = async function (req, res) {
   if (req.user) {

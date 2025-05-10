@@ -91,6 +91,7 @@ button:hover {
 .welcome-wrapper {
   max-width: 400px;
   text-align: center;
+  z-index: 5;
 }
 
 .welcome-wrapper > * {

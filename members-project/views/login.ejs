@@ -35,6 +35,18 @@
           <input type="password" name="password" id="password" />
           <button type="submit">Login</button>
         </form>
+        <% if (locals.errors){ %>
+        <ul class="errors">
+          <% locals.errors.forEach(function(message) { %>
+          <li><%= message.msg %></li>
+          <% } ); %>
+        </ul>
+        <% } %> <% if (locals.error){ %>
+        <ul class="errors">
+          <% locals.error.forEach(function(message) { %>
+          <li><%= message %></li>
+          <% } )} %>
+        </ul>
 
         <a href="/">Home</a>
       </div>
